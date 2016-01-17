@@ -1,4 +1,4 @@
-ArrayList <Integer>images = new ArrayList();
+ArrayList <Integer>numbers = new ArrayList();
 ArrayList <PImage>pictures = new ArrayList();
 int displayed[];
 PImage image1;
@@ -57,56 +57,55 @@ int imagex;
 int score;
 int click1;
 int click2;
-int a;
-int b;
 int loading;
 int line1;
 int line2;
 int lines;
+float HC;
+int start;
 void setup() {
   displayed = new int[16];
   size(640, 640);
-  image1 = loadImage("tree.png");
+  
+  //images
   image2 = loadImage("tree.png");
   image3 = loadImage("phone.png");
-  image4 = loadImage("phone.png");
-  image5 = loadImage("book.jpg");
   image6 = loadImage("book.jpg");
   image7 = loadImage("ufo.png");
-  image8 = loadImage("ufo.png");
-  image9 = loadImage("apple.jpeg");
-  image10 = loadImage("apple.jpeg");
-  image11 = loadImage("heli.png");
-  image12 = loadImage("heli.png");
-  image13 = loadImage("pen.png");
-  image14 = loadImage("pen.png");
-  image15 = loadImage("clock.png");
-  image16 = loadImage("clock.png");
-  images.add(1);
-  images.add(1);
-  images.add(2);
-  images.add(2);
-  images.add(3);  
-  images.add(3);
-  images.add(4);
-  images.add(4);
-  images.add(5);
-  images.add(5);
-  images.add(6);
-  images.add(6);
-  images.add(7);  
-  images.add(7);
-  images.add(0);
-  images.add(0);
+  image4 = loadImage("apple.jpeg");
+  image5 = loadImage("heli.png");
+  image8 = loadImage("pen.png");
+  image1 = loadImage("clock.png");
+  
+  //number array
+  numbers.add(1);
+  numbers.add(1);
+  numbers.add(2);
+  numbers.add(2);
+  numbers.add(3);  
+  numbers.add(3);
+  numbers.add(4);
+  numbers.add(4);
+  numbers.add(5);
+  numbers.add(5);
+  numbers.add(6);
+  numbers.add(6);
+  numbers.add(7);  
+  numbers.add(7);
+  numbers.add(0);
+  numbers.add(0);
+  
+  //image array
   pictures.add(image1);
+  pictures.add(image2);
   pictures.add(image3);
+  pictures.add(image4);
   pictures.add(image5);
+  pictures.add(image6);
   pictures.add(image7);
-  pictures.add(image9);
-  pictures.add(image11);
-  pictures.add(image13);
-  pictures.add(image15);
+  pictures.add(image8);
 
+//the board square covers
   col1=255;
   col2=255;
   col3=255;
@@ -124,7 +123,7 @@ void setup() {
   col15=255;
   col16=255;
 
-
+//the square values
   sq1=-1;
   sq2=-1;
   sq3=-1;
@@ -141,21 +140,21 @@ void setup() {
   sq14=-1;
   sq15=-1;
   sq16=-1;
-  click1=-1;
-  click2=-1;
-  a=100;
-  b=3;
-  line1=0;
-  line2=0;
-  lines=3;
-  loading=320;
-  score=0;
-  frameRate(60);
+  
+  
+  click1=-1;  //check click
+  click2=-1;   //check click
+  line1=0;  //loadingscreen
+  line2=0;    //loadingscreen
+  lines=3;  //loadingscreen
+  loading=320;  //loadingscreen
+  score=0;  //check if you won 
+  start=150;   //start word
 }
 
 void draw() {
   background(255);
-
+   
   //opening animating
   if (line1<650) {
     line1=line1+lines;
@@ -173,52 +172,56 @@ void draw() {
     //timer
     m= m+0.043;
     String s = nf(m, 3, 1);
-    
+
     //randomizes board
-    if (images.size()>0) {
+    if (numbers.size()>0) {
       int i=0;
-      while (i<images.size()) {
-        if (i==int(random(0, images.size()))) {
+      while (i<numbers.size()) {
+        if (i==int(random(0, numbers.size()))) {
           if (sq1==-1) {
-            sq1=images.get(i);
+            sq1=numbers.get(i);
           } else if (sq2==-1) {
-            sq2=images.get(i);
+            sq2=numbers.get(i);
           } else if (sq3==-1) {
-            sq3=images.get(i);
+            sq3=numbers.get(i);
           } else if (sq4==-1) {
-            sq4=images.get(i);
+            sq4=numbers.get(i);
           } else if (sq5==-1) {
-            sq5=images.get(i);
+            sq5=numbers.get(i);
           } else if (sq6==-1) {
-            sq6=images.get(i);
+            sq6=numbers.get(i);
           } else if (sq7==-1) {
-            sq7=images.get(i);
+            sq7=numbers.get(i);
           } else if (sq8==-1) {
-            sq8=images.get(i);
+            sq8=numbers.get(i);
           } else if (sq9==-1) {
-            sq9=images.get(i);
+            sq9=numbers.get(i);
           } else if (sq10==-1) {
-            sq10=images.get(i);
+            sq10=numbers.get(i);
           } else if (sq11==-1) {
-            sq11=images.get(i);
+            sq11=numbers.get(i);
           } else if (sq12==-1) {
-            sq12=images.get(i);
+            sq12=numbers.get(i);
           } else if (sq13==-1) {
-            sq13=images.get(i);
+            sq13=numbers.get(i);
           } else if (sq14==-1) {
-            sq14=images.get(i);
+            sq14=numbers.get(i);
           } else if (sq15==-1) {
-            sq15=images.get(i);
+            sq15=numbers.get(i);
           } else if (sq16==-1) {
-            sq16=images.get(i);
+            sq16=numbers.get(i);
           }
-          images.remove(i);
+          numbers.remove(i);
         }
         i++;
       }
     }
+//highscore
+if (HC==0){
+   HC=10000;
+}
 
-//draws the boards and picturs under the tiles
+    //draws the boards and picturs under the tiles
     if (sq16!=-1) {
       image(pictures.get(sq1), -1, -1, 161, 161);
       fill(col1);
@@ -284,12 +287,21 @@ void draw() {
       image(pictures.get(sq16), 480, 480, 160, 160);
       fill(col16);
       rect(480, 480, 160, 160);
-      
+
       //timer
       textSize(20);
       fill(0);
       text(""+s, 20, 20);
-      
+
+      //start word
+      if (start>10) {
+        start=start-10;
+    textAlign(CENTER);
+        fill(0);
+        textSize(start);
+        text("start", 320, 320);
+            textAlign(BASELINE);
+      }
       //checks if pictures are the same
       if (click1>-1&&click2>-1) {
 
@@ -348,7 +360,7 @@ void draw() {
           score=score+1;
         } else {
           m2=m2+1;
-          if (m2>15) {
+          if (m2>5) {
 
             if (col1==256) {
               col1=255;
@@ -404,18 +416,23 @@ void draw() {
           }
         }
       }
-      
       //endes game when all picked
       if (score>=8) {
         //noLoop();
         textSize(30);
         fill(255);
-        m=m-0.016;
-        text("CONGRATS it took you "+m, 60, 300);
+        //m=m-0.016;
+        if (m<HC) {
+          HC=m;
+        }
+        float time=m-2.192963;
+        text("CONGRATS it took you "+time, 60, 300);
         text("  seconds", 300, 350);
-        text("press 'R' to restart", 200, 400);
+        text("High Score: "+HC, 200, 400);
+        text("press 'R' to restart", 200, 450);
+      
 
-//finish animation
+        //finish animation
         if (col1>0) {
           col1=col1-5; 
           col2=col2-5; 
@@ -444,180 +461,183 @@ void draw() {
 
 
 void mouseClicked() {
-  //top row
-  if (col1==255) {
-    if (mouseX<160&&mouseY<160) {
-      col1=256;
-      
-      //to check if clicks are the same
-      if (click1<0) {
-        click1=sq1;
-      } else {
-        click2=sq1;
-      }
-    }
-  }
-  if (col2==255) {
-    if (mouseX>160&&mouseY<160&&mouseX<320) {
-      col2=256;
-      if (click1<0) {
-        click1=sq2;
-      } else {
-        click2=sq2;
-      }
-    }
-  }
-  if (col3==255) {
-    if (mouseX>320&&mouseY<160&&mouseX<480) {
-      col3=256;
-      if (click1<0) {
-        click1=sq3;
-      } else {
-        click2=sq3;
-      }
-    }
-  }
-  if (col4==255) {
-    if (mouseX>480&&mouseY<160) {
-      col4=256;
-      if (click1<0) {
-        click1=sq4;
-      } else {
-        click2=sq4;
-      }
-    }
-  }
-  //2nd top
-  if (col5==255) {
-    if (mouseX<160&&mouseY>160&&mouseY<320) {
-      col5=256;
-      if (click1<0) {
-        click1=sq5;
-      } else {
-        click2=sq5;
-      }
-    }
-  }
-  if (col6==255) {
-    if (mouseX>160&&mouseX<320&&mouseY>160&&mouseY<320) {
-      col6=256;
-      if (click1<0) {
-        click1=sq6;
-      } else {
-        click2=sq6;
-      }
-    }
-  }
-  if (col7==255) {
-    if (mouseX>320&&mouseX<480&&mouseY>160&&mouseY<320) {
-      col7=256;
-      if (click1<0) {
-        click1=sq7;
-      } else {
-        click2=sq7;
-      }
-    }
-  }
-  if (col8==255) {
-    if (mouseX>480&&mouseY>160&&mouseY<320) {
-      col8=256;
-      if (click1<0) {
-        click1=sq8;
-      } else {
-        click2=sq8;
-      }
-    }
-  }
+  if (line1>640) {
 
-  //third
-  if (col9==255) {
-    if (mouseX<160&&mouseY>320&&mouseY<480) {
-      col9=256;
-      if (click1<0) {
-        click1=sq9;
-      } else {
-        click2=sq9;
-      }
-    }
-  }
-  if (col10==255) {
-    if (mouseX>160&&mouseX<320&&mouseY>320&&mouseY<480) {
-      col10=256;
-      if (click1<0) {
-        click1=sq10;
-      } else {
-        click2=sq10;
-      }
-    }
-  }
-  if (col11==255) {
-    if (mouseX>320&&mouseX<480&&mouseY>320&&mouseY<480) {
-      col11=256;
-      if (click1<0) {
-        click1=sq11;
-      } else {
-        click2=sq11;
-      }
-    }
-  }
-  if (col12==255) {
-    if (mouseX>480&&mouseY>320&&mouseY<480) {
-      col12=256;
-      if (click1<0) {
-        click1=sq12;
-      } else {
-        click2=sq12;
-      }
-    }
-  }
+    //top row
+    if (col1==255) {
+      if (mouseX<160&&mouseY<160) {
+        col1=256;
 
-  //bottom
-  if (col13==255) {
-    if (mouseX<160&&mouseY>480) {
-      col13=256;
-      if (click1<0) {
-        click1=sq13;
-      } else {
-        click2=sq13;
+        //to check if clicks are the same
+        if (click1<0) {
+          click1=sq1;
+        } else {
+          click2=sq1;
+        }
       }
     }
-  }
-  if (col14==255) {
-    if (mouseX>160&&mouseY>480&&mouseX<320) {
-      col14=256;
-      if (click1<0) {
-        click1=sq14;
-      } else {
-        click2=sq14;
+    if (col2==255) {
+      if (mouseX>160&&mouseY<160&&mouseX<320) {
+        col2=256;
+        if (click1<0) {
+          click1=sq2;
+        } else {
+          click2=sq2;
+        }
       }
     }
-  }
-  if (col15==255) {
-    if (mouseX>320&&mouseY>480&&mouseX<480) {
-      col15=256;
-      if (click1<0) {
-        click1=sq15;
-      } else {
-        click2=sq15;
+    if (col3==255) {
+      if (mouseX>320&&mouseY<160&&mouseX<480) {
+        col3=256;
+        if (click1<0) {
+          click1=sq3;
+        } else {
+          click2=sq3;
+        }
       }
     }
-  }
-  if (col16==255) {
-    if (mouseX>480&&mouseY>480) {
-      col16=256;
-      if (click1<0) {
-        click1=sq16;
-      } else {
-        click2=sq16;
+    if (col4==255) {
+      if (mouseX>480&&mouseY<160) {
+        col4=256;
+        if (click1<0) {
+          click1=sq4;
+        } else {
+          click2=sq4;
+        }
+      }
+    }
+    //2nd top
+    if (col5==255) {
+      if (mouseX<160&&mouseY>160&&mouseY<320) {
+        col5=256;
+        if (click1<0) {
+          click1=sq5;
+        } else {
+          click2=sq5;
+        }
+      }
+    }
+    if (col6==255) {
+      if (mouseX>160&&mouseX<320&&mouseY>160&&mouseY<320) {
+        col6=256;
+        if (click1<0) {
+          click1=sq6;
+        } else {
+          click2=sq6;
+        }
+      }
+    }
+    if (col7==255) {
+      if (mouseX>320&&mouseX<480&&mouseY>160&&mouseY<320) {
+        col7=256;
+        if (click1<0) {
+          click1=sq7;
+        } else {
+          click2=sq7;
+        }
+      }
+    }
+    if (col8==255) {
+      if (mouseX>480&&mouseY>160&&mouseY<320) {
+        col8=256;
+        if (click1<0) {
+          click1=sq8;
+        } else {
+          click2=sq8;
+        }
+      }
+    }
+
+    //third
+    if (col9==255) {
+      if (mouseX<160&&mouseY>320&&mouseY<480) {
+        col9=256;
+        if (click1<0) {
+          click1=sq9;
+        } else {
+          click2=sq9;
+        }
+      }
+    }
+    if (col10==255) {
+      if (mouseX>160&&mouseX<320&&mouseY>320&&mouseY<480) {
+        col10=256;
+        if (click1<0) {
+          click1=sq10;
+        } else {
+          click2=sq10;
+        }
+      }
+    }
+    if (col11==255) {
+      if (mouseX>320&&mouseX<480&&mouseY>320&&mouseY<480) {
+        col11=256;
+        if (click1<0) {
+          click1=sq11;
+        } else {
+          click2=sq11;
+        }
+      }
+    }
+    if (col12==255) {
+      if (mouseX>480&&mouseY>320&&mouseY<480) {
+        col12=256;
+        if (click1<0) {
+          click1=sq12;
+        } else {
+          click2=sq12;
+        }
+      }
+    }
+
+    //bottom
+    if (col13==255) {
+      if (mouseX<160&&mouseY>480) {
+        col13=256;
+        if (click1<0) {
+          click1=sq13;
+        } else {
+          click2=sq13;
+        }
+      }
+    }
+    if (col14==255) {
+      if (mouseX>160&&mouseY>480&&mouseX<320) {
+        col14=256;
+        if (click1<0) {
+          click1=sq14;
+        } else {
+          click2=sq14;
+        }
+      }
+    }
+    if (col15==255) {
+      if (mouseX>320&&mouseY>480&&mouseX<480) {
+        col15=256;
+        if (click1<0) {
+          click1=sq15;
+        } else {
+          click2=sq15;
+        }
+      }
+    }
+    if (col16==255) {
+      if (mouseX>480&&mouseY>480) {
+        col16=256;
+        if (click1<0) {
+          click1=sq16;
+        } else {
+          click2=sq16;
+        }
       }
     }
   }
 }
-
 //reset game
 void keyPressed() {
   if (key=='r'||key=='R') {
     setup();
     loop();
+    m=0;
   }
 }
